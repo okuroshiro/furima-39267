@@ -8,7 +8,9 @@
 | encrypted_password  | string | null: false             |
 | name                | string | null: false             |
 | nickname            | string | null: false             |
-| birthday            | string | null: false             |
+| birth_year          | string | null: false             |
+| birth_month         | string | null: false             |
+| birth_day           | string | null: false             |
 | family_name         | string | null: false             |
 | first_name          | string | null: false             |
 | family_name_reading | string | null: false             |
