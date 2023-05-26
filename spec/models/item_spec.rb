@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Item, type: :model do
   before do
+    @user = FactoryBot.create(:user)
     @item = FactoryBot.build(:item)
   end
   describe '出品機能' do
@@ -65,6 +66,12 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Price can't be blank")
       end
 
+      it 'priceに半角数字以外が含まれている場合は出品できない' do
+        @item.price = "３０００"
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price is invalid. Input half-width characters")
+      end
+
       it "priceが299以下だと登録できないこと" do
         @item.price = 299
         @item.valid?
@@ -75,6 +82,12 @@ RSpec.describe Item, type: :model do
         @item.price = 10000000
         @item.valid?
         expect(@item.errors.full_messages).to include("Price is out of setting range")
+      end
+
+      it 'userが紐付いていなければ出品できない' do
+        @item.user = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("User must exist")
       end
     end
   end
