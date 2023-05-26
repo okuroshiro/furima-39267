@@ -69,7 +69,7 @@ RSpec.describe Item, type: :model do
       it 'priceに半角数字以外が含まれている場合は出品できない' do
         @item.price = "３０００"
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is invalid. Input half-width characters")
+        expect(@item.errors.full_messages).to include("Price is invalid. Input half-width characters") 
       end
 
       it "priceが299以下だと登録できないこと" do
