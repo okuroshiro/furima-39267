@@ -47,14 +47,14 @@ class ItemsController < ApplicationController
                                  :price).merge(user_id: current_user.id)
   end
 
+  def set_item
+    @item = Item.find(params[:id])
+  end
+
   def move_to_index
     return if user_signed_in? && current_user == @item.user
 
     redirect_to root_path
-  end
-
-  def set_item
-    @item = Item.find(params[:id])
   end
 
 end
