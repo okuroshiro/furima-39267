@@ -25,4 +25,9 @@ class OrderAddress
       false
     end
   end
+
+  def user
+    User.find_by(id: user_id)
+  end
+  
 end
