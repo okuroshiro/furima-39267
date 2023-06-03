@@ -17,7 +17,7 @@ class OrderAddress
   validates :tel, length: { minimum: 10, maximum: 11, message: 'is too short' }
 
   def save
-    order = Order.create(user_id: user_id, item_id: item_id, token: token)
+    order = Order.create(user_id: user_id, item_id: item_id)
    
       Address.create(postal_code: postal_code, prefecture_id: prefecture_id, city: city, house_number: house_number,
                      building_name: building_name, tel: tel, order_id: order.id)
