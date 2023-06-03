@@ -12,9 +12,9 @@ class OrderAddress
     validates :user_id
     validates :item_id
   end
-
-  validates :tel, length: { minimum: 10, maximum: 11, message: 'is too short' }
+  
   validates :tel, format: { with: /\A\d+\z/, message: 'is invalid. Input only numbers' }
+  validates :tel, length: { minimum: 10, maximum: 11, message: 'is too short' }
 
   def save
     order = Order.create(user_id: user_id, item_id: item_id, token: token)
