@@ -6,7 +6,5 @@ FactoryBot.define do
     city { Faker::Address.city }
     house_number { Faker::Address.street_address }
     tel { '09012345678' }
-    association :user
-    association :item
   end
 end
