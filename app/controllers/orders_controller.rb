@@ -8,6 +8,7 @@ class OrdersController < ApplicationController
   end
 
   def create
+
     @order_address = OrderAddress.new(order_params)
     if @order_address.valid?
       pay_item
@@ -38,8 +39,9 @@ class OrdersController < ApplicationController
   def set_item
     @item = Item.find(params[:item_id])
   end
-end
 
-def move_to_index
-  redirect_to root_path if current_user.id == @item.user.id || @item.order.present?
+  def move_to_index
+    redirect_to root_path if current_user.id == @item.user.id || @item.order.present?
+  end
+
 end
