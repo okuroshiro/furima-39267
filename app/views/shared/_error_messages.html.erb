@@ -1,8 +1,25 @@
 <% if model.errors.any? %>
 <div class="error-alert">
   <ul>
-    <% model.errors.full_messages.each do |message| %>
-    <li class='error-message'><%= message %></li>
+    <% model.errors.each do |attribute, message| %>
+      <% translated_message = message.gsub('is invalid', 'が無効です').gsub('Include both letters and numbers', '英字と数字を含めてください').gsub('Input full-width characters', '全角文字で入力してください').gsub('Input full-width katakana characters', '全角カタカナで入力してください').gsub('can\'t be blank', 'を入力してください').gsub('Input half-width characters', '半角数字で入力してください。').gsub('is out of setting range', 'は範囲内で入力してください。').gsub('Enter it as follows (e.g. 123-4567)', '例のように入力してください（例：123-4567）').gsub('Input only numbers', '数字で入力してください。').gsub('is too short', 'が短すぎます。') %>
+      <% translated_attribute = case attribute
+        when :token
+          'クレジットカード情報'
+        when :postal_code
+          '郵便番号'
+        when :prefecture_id
+          '都道府県'
+        when :city
+          '市区町村'
+        when :house_number
+          '番地'
+        when :tel
+          '電話番号'
+        else
+          model.class.human_attribute_name(attribute)
+        end %>
+      <li class='error-message'><%= translated_attribute %><%= translated_message %></li>
     <% end %>
   </ul>
 </div>
